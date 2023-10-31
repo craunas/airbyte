@@ -66,7 +66,7 @@ public class AzureBlobStorageJsonlWriter extends BaseAzureBlobStorageWriter impl
     int recordSize = jsonRecord.getBytes(StandardCharsets.UTF_8).length;
     if (config.getBlobSpillSize() > 0 && replicatedBytes + recordSize > config.getBlobSpillSize()) {
       sequence++;
-      String subBlobName = appendBlobClient.getBlobName().substring(0, appendBlobClient.getBlobName().length() - 1);
+      String subBlobName = appendBlobClient.getBlobName().substring(0, String.valueOf(sequence).length()) - 1);
       String blobName = subBlobName + sequence;
 
       final AppendBlobClient appendBlobClient = specializedBlobClientBuilder
